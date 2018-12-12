@@ -23,7 +23,9 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         this.side3 = triangle.getSide3();
     }
 
-    // равносторонний
+    /**
+     * Returns true when all sides of a triangle are equal
+     */
     public boolean isEquilateral() {
         if ((Double.compare(side1, side2) == 0) && (Double.compare(side1, side3) == 0)) {
             LOGGER.info(String.format("Triangle with sides %f, %f, %f is equilateral", side1, side2, side3));
@@ -34,8 +36,31 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         }
     }
 
-    //тупоугольный
-    //cos <C = (a²+b²-c²)/2ab
+    /**
+     * Returns true when the area of the square whose side is the hypotenuse
+     * (the side opposite the right angle) is equal to the sum of the areas
+     * of the squares whose sides are the two legs (the two sides that meet at a right angle).
+     */
+    public boolean isRightAngled() {
+        double side1Square = side1 * side1;
+        double side2Square = side2 * side2;
+        double side3Square = side3 * side3;
+
+        if ((Double.compare(side1Square, (side2Square + side3Square)) == 0) ||
+                (Double.compare(side2Square, (side1Square + side3Square)) == 0) ||
+                (Double.compare(side3Square, (side2Square + side1Square)) == 0)) {
+            LOGGER.info(String.format("Triangle with sides %f, %f, %f is rightangle", side1, side2, side3));
+            return true;
+        } else {
+            LOGGER.info(String.format("Triangle with sides %f, %f, %f is not rightangle", side1, side2, side3));
+            return false;
+        }
+    }
+
+    /**
+     * Returns true when the cos of the 'C' angle opposite max side is less than zero
+     * (cos <C = (a²+b²-c²)/2ab) < 0
+     */
     public boolean isObtuse() {
         List<Double> sides = new ArrayList<>();
         sides.add(side1);
@@ -57,9 +82,11 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         }
     }
 
-    //остроугольный
+    /**
+     * Returns true when the triangle is not obtuse or right-angled
+     */
     public boolean isAcute() {
-        boolean result = !isObtuse() && !isRightAngle();
+        boolean result = !isObtuse() && !isRightAngled();
         if (result) {
             LOGGER.info("Trianle is accute");
         } else {
@@ -68,7 +95,9 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         return result;
     }
 
-    // равнобедренный
+    /**
+     * Returns true when at least two sides of the triangle are equal
+     */
     public boolean isIsosceles() {
         if (((Double.compare(side1, side2) == 0) ||
                 (Double.compare(side1, side3) == 0)) ||
@@ -81,31 +110,8 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         }
     }
 
-
-
-
-    // прямоугольный
-    public boolean isRightAngle() {
-        double side1Square = side1 * side1;
-        double side2Square = side2 * side2;
-        double side3Square = side3 * side3;
-
-        if ((Double.compare(side1Square, (side2Square + side3Square)) == 0) ||
-                (Double.compare(side2Square, (side1Square + side3Square)) == 0) ||
-                (Double.compare(side3Square, (side2Square + side1Square)) == 0)) {
-            LOGGER.info(String.format("Triangle with sides %f, %f, %f is rightangle", side1, side2, side3));
-            return true;
-        } else {
-            LOGGER.info(String.format("Triangle with sides %f, %f, %f is not rightangle", side1, side2, side3));
-            return false;
-        }
-    }
-
-
-    /*
-    Площадь тругольника по формуле Герона равна корню из
-    произведения разностей полупериметра
-    треугольника (p) и каждой из его сторон (a, b, c):
+    /**
+     * Returns double value of the triangle area counted by Geron's formula
      */
     @Override
     public double getArea() {
@@ -116,6 +122,9 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         return triangleArea;
     }
 
+    /**
+     * Returns sum of all triangle sides
+     */
     @Override
     public double getPerimeter() {
         double result = side1 + side2 + side3;
@@ -123,6 +132,9 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
         return result;
     }
 
+    /**
+     * Checks if three points can be a triagnle
+     */
     @Override
     public boolean isTriangle(List<Point> points) {
         if (points.size() != 3) {

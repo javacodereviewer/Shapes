@@ -1,6 +1,5 @@
 package com.epam.shapes.services;
 
-import com.epam.shapes.entity.Shape;
 import com.epam.shapes.entity.Triangle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +11,6 @@ public class TriangleFactory implements ShapeFactory {
     private static final Logger LOGGER = LogManager.getLogger(TriangleFactory.class);
     private final static ParamsReader PARAMS_READER = new ParamsReader();
     public static final String SPLIT_REGEX = " ";
-
 
     @Override
     public List<Triangle> getShapes() throws NoValidDataExcepiton{
@@ -32,12 +30,12 @@ public class TriangleFactory implements ShapeFactory {
         return triangles;
     }
 
-    private Triangle createTriangle(String s) {
+    public Triangle createTriangle(String s) {
         String[] sides = s.split(SPLIT_REGEX);
         double side1 = Double.valueOf(sides[0]);
         double side2 = Double.valueOf(sides[1]);
         double side3 = Double.valueOf(sides[2]);
-        LOGGER.info(String.format("New Triandle created, side1=%f, side2=%f, side3=%f", side1, side2, side3));
+        LOGGER.info(String.format("New Triangle created, side1=%f, side2=%f, side3=%f", side1, side2, side3));
         return new Triangle(side1, side2, side3);
     }
 }
