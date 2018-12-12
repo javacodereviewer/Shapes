@@ -23,7 +23,7 @@ public class ParamsReader {
         return getParamsFromFile(PARAMS_FILE);
     }
 
-    private List<String> getParamsFromFile(String paramsFileName) {
+    public List<String> getParamsFromFile(String paramsFileName) {
         List<String> shapeParamsLine = new ArrayList<>();
         try {
             final List<String> lines = Files.readAllLines(Paths.get(paramsFileName));

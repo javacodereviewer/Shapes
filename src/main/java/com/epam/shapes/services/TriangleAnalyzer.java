@@ -12,17 +12,31 @@ import java.util.List;
 public class TriangleAnalyzer implements ShapeAnalyzer {
     private static final Logger LOGGER = LogManager.getLogger(TriangleAnalyzer.class);
     private Triangle triangle;
+    private double side1;
+    private double side2;
+    private double side3;
 
     public TriangleAnalyzer(Triangle triangle) {
         this.triangle = triangle;
+        this.side1 = triangle.getSide1();
+        this.side2 = triangle.getSide2();
+        this.side3 = triangle.getSide3();
+    }
+
+    // равносторонний
+    public boolean isEquilateral() {
+        if ((Double.compare(side1, side2) == 0) && (Double.compare(side1, side3) == 0)) {
+            LOGGER.info(String.format("Triangle with sides %f, %f, %f is equilateral", side1, side2, side3));
+            return true;
+        } else {
+            LOGGER.info(String.format("Triangle with sides %f, %f, %f is not equilateral", side1, side2, side3));
+            return false;
+        }
     }
 
     //тупоугольный
     //cos <C = (a²+b²-c²)/2ab
     public boolean isObtuse() {
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
         List<Double> sides = new ArrayList<>();
         sides.add(side1);
         sides.add(side2);
@@ -56,10 +70,6 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
 
     // равнобедренный
     public boolean isIsosceles() {
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
-
         if (((Double.compare(side1, side2) == 0) ||
                 (Double.compare(side1, side3) == 0)) ||
                 (Double.compare(side2, side3) == 0)) {
@@ -72,27 +82,10 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
     }
 
 
-    // равносторонний
-    public boolean isEquilateral() {
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
-        if ((Double.compare(side1, side2) == 0) && (Double.compare(side1, side3) == 0)) {
-            LOGGER.info(String.format("Triangle with sides %f, %f, %f is equilateral", side1, side2, side3));
-            return true;
-        } else {
-            LOGGER.info(String.format("Triangle with sides %f, %f, %f is not equilateral", side1, side2, side3));
-            return false;
-        }
-    }
+
 
     // прямоугольный
     public boolean isRightAngle() {
-
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
-
         double side1Square = side1 * side1;
         double side2Square = side2 * side2;
         double side3Square = side3 * side3;
@@ -117,20 +110,14 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
     @Override
     public double getArea() {
         double semiPerimeter = getPerimeter() / 2;
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
-
-        double triangleArea = Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
+        double triangleArea = Math.sqrt(semiPerimeter * (semiPerimeter - side1)
+                * (semiPerimeter - side2) * (semiPerimeter - side3));
         LOGGER.info(String.format("Triangle area is %f", triangleArea));
         return triangleArea;
     }
 
     @Override
     public double getPerimeter() {
-        double side1 = triangle.getSide1();
-        double side2 = triangle.getSide2();
-        double side3 = triangle.getSide3();
         double result = side1 + side2 + side3;
         LOGGER.info(String.format("Triangle perimeter is %f", result));
         return result;
@@ -164,5 +151,8 @@ public class TriangleAnalyzer implements ShapeAnalyzer {
 
     public void setTriangle(Triangle triangle) {
         this.triangle = triangle;
+        this.side1 = triangle.getSide1();
+        this.side2 = triangle.getSide2();
+        this.side3 = triangle.getSide3();
     }
 }
