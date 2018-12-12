@@ -15,42 +15,37 @@ public class TriangleAnalyzerTest {
     @Test
     public void isEquilateral() {
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(3.3, 3.3, 3.3));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isEquilateral();
-        assertEquals(expected, actual);
+        assertTrue(actual);
 
     }
 
     @Test
     public void isRightAngle() {
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(3.0, 4.0, 5.0));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isRightAngle();
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 
     @Test
     public void isObtuse() {
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(11.0, 4.0, 9.0));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isObtuse();
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 
     @Test
     public void isAcute() {
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(5.0, 4.0, 4.0));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isAcute();
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 
     @Test
     public void isIsosceles() {
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(5.0, 4.0, 4.0));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isIsosceles();
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 
     @Test
@@ -77,8 +72,7 @@ public class TriangleAnalyzerTest {
         testPoints.add(new Point(5.0, 10.0));
         testPoints.add(new Point(10.0, 10.0));
         triangleAnalyzer = new TriangleAnalyzer(new Triangle(13.0, 14.0, 15.0));
-        boolean expected = true;
         boolean actual = triangleAnalyzer.isTriangle(testPoints);
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 }

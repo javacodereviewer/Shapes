@@ -1,5 +1,7 @@
 package com.epam.shapes.entity;
 
+import java.util.Objects;
+
 public class Triangle implements Shape{
     private double side1;
     private double side2;
@@ -9,6 +11,30 @@ public class Triangle implements Shape{
         this.side1 = side1;
         this.side2 = side2;
         this.side3 = side3;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return Double.compare(triangle.side1, side1) == 0 &&
+                Double.compare(triangle.side2, side2) == 0 &&
+                Double.compare(triangle.side3, side3) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(side1, side2, side3);
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "side1=" + side1 +
+                ", side2=" + side2 +
+                ", side3=" + side3 +
+                '}';
     }
 
     public double getSide1() {

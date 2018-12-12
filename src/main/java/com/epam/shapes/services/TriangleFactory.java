@@ -10,29 +10,9 @@ import java.util.List;
 
 public class TriangleFactory implements ShapeFactory {
     private static final Logger LOGGER = LogManager.getLogger(TriangleFactory.class);
-
     private final static ParamsReader PARAMS_READER = new ParamsReader();
+    public static final String SPLIT_REGEX = " ";
 
-//    public static void main(String[] args) throws NoValidDataExcepiton {
-//        ShapeFactory factory = new TriangleFactory();
-//
-//
-//        List<? extends Shape> triangles = factory.getShapes();
-//        int i = 1;
-//        for (Shape s : triangles) {
-//            TriangleAnalyzer analyzer = new TriangleAnalyzer((Triangle)s);
-//            System.out.println("Tringle #" + i);
-//            analyzer.getArea();
-//            analyzer.getPerimeter();
-//            analyzer.isAcute();
-//            analyzer.isEquilateral();
-//            analyzer.isIsosceles();
-//            analyzer.isObtuse();
-//            analyzer.isRightAngle();
-//            i++;
-//        }
-//
-//    }
 
     @Override
     public List<Triangle> getShapes() throws NoValidDataExcepiton{
@@ -53,7 +33,7 @@ public class TriangleFactory implements ShapeFactory {
     }
 
     private Triangle createTriangle(String s) {
-        String[] sides = s.split(" ");
+        String[] sides = s.split(SPLIT_REGEX);
         double side1 = Double.valueOf(sides[0]);
         double side2 = Double.valueOf(sides[1]);
         double side3 = Double.valueOf(sides[2]);

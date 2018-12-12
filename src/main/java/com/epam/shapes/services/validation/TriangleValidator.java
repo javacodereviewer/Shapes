@@ -5,11 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 public class TriangleValidator implements Validator {
     private static final Logger LOGGER = LogManager.getLogger(TriangleValidator.class);
+    public static final String SPLIT_REGEX = " ";
+
     @Override
     public boolean validate(String paramsLine) {
         LOGGER.info(String.format("Validating stringdata : %s", paramsLine));
 
-        String[] triangleSides = paramsLine.split(" ");
+        String[] triangleSides = paramsLine.split(SPLIT_REGEX);
         if (triangleSides.length != 3) {
             LOGGER.warn("Number of params is not 3, not valid data");
             return false;
